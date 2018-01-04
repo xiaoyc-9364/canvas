@@ -230,3 +230,26 @@ init();
     ball.draw();
 
 })();
+(function() {
+    var img = new Image();
+    img.src = 'rhino.jpg';
+    var canvas = document.getElementById('canvas7');
+    var ctx = canvas.getContext('2d');
+    // img.onload = function() {
+    //     ctx.drawImage(img, 0, 0);
+    //     img.style.display = "none";
+    // };
+    // ctx.fillStyle = 'green';
+    ctx.fillRect(0, 0, 100, 100);
+    var color = document.getElementById('color');
+    function pick(e) {
+        var x = e.layerX;
+        var y = e.layerY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        var data = pixel.data;
+        var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + data[3] / 255 + ')';
+        color.style.background = rgba;
+        color.textContent = rgba;
+    }
+    canvas.addEventListener('mousemove', pick, false);
+})();
